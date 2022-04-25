@@ -30,8 +30,6 @@ public class ClientReport2 {
 
     private void generateReport() throws Exception {
 
-        Map<String, Object> params = new HashMap<String, Object>();
-
         JasperReport report = JasperCompileManager.compileReport(getPathToReportPackage());
 
         Map parametros = new HashMap();
