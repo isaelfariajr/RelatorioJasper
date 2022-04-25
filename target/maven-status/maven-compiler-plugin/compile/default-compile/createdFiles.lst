@@ -1,5 +1,7 @@
-com\br\jasper\JasperReport.class
-com\br\jasper\service\ClientReport.class
-com\br\jasper\domain\Client$ClientBuilder.class
-com\br\jasper\domain\Client.class
-com\br\jasper\service\GenerateClients.class
+com/br/jasper/service/ClientReport2.class
+com/br/jasper/domain/Client$ClientBuilder.class
+com/br/jasper/service/ClientReport.class
+com/br/jasper/service/GenerateClients.class
+com/br/jasper/domain/Client.class
+com/br/jasper/JasperReport.class
+com/br/jasper2/JasperReport2.class

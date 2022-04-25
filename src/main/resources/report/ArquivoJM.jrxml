@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListagemDocumentos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9177f52d-7742-423c-b473-701794c20b5c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="arquivojm"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="280"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="709"/>
+	<parameter name="clienteDe" class="java.lang.Integer"/>
+	<parameter name="clienteAte" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT caixa.id CD_CAIXA,
+      cliente.id CD_CLIENTE,
+      cliente.nome NM_CLIENTE,
+      cliente.cnpj CNPJ,
+      tipo.nome TIPO,
+      documento.nome NM_DOCUMENTO,
+      documento.observacao OBSERVACAO,
+      documento.dt_entrada DT_ENTRADA
+  FROM arquivojm.caixa caixa,
+      arquivojm.cliente cliente,
+      arquivojm.documento documento,
+      tipo_documento tipo
+  WHERE caixa.cliente = cliente.id
+      AND documento.cliente = caixa.cliente
+      AND documento.caixa = caixa.id
+      AND tipo.id = documento.tipo_documento
+      AND cliente.id BETWEEN $P{clienteDe} AND $P{clienteAte}
+  ORDER BY caixa.id]]>
+	</queryString>
+	<field name="CD_CAIXA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="CD_CAIXA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="caixa"/>
+	</field>
+	<field name="CD_CLIENTE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="CD_CLIENTE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="NM_CLIENTE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="NM_CLIENTE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="CNPJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cnpj"/>
+		<property name="com.jaspersoft.studio.field.label" value="CNPJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="TIPO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="TIPO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_documento"/>
+	</field>
+	<field name="NM_DOCUMENTO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="NM_DOCUMENTO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="documento"/>
+	</field>
+	<field name="OBSERVACAO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="observacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="OBSERVACAO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="documento"/>
+	</field>
+	<field name="DT_ENTRADA" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="dt_entrada"/>
+		<property name="com.jaspersoft.studio.field.label" value="DT_ENTRADA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="documento"/>
+	</field>
+	<group name="grupoCliente">
+		<groupExpression><![CDATA[$F{CD_CLIENTE}]]></groupExpression>
+		<groupHeader>
+			<band height="55">
+				<staticText>
+					<reportElement x="0" y="10" width="45" height="21" uuid="395c1427-2254-4fe7-9ff9-455125cf1134"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CNPJ :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="50" y="8" width="260" height="21" uuid="2d825401-f94b-4090-82ad-6e563ecfc054"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CNPJ}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="29" width="45" height="21" uuid="e550d2fd-24e0-475a-95e3-81fd3c20fa19"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Client :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="50" y="28" width="260" height="23" uuid="b6b582da-7a52-492c-b889-e761720c5dfa"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CLIENTE}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="grupoCaixa">
+		<groupExpression><![CDATA[$F{CD_CAIXA}]]></groupExpression>
+		<groupHeader>
+			<band height="63">
+				<staticText>
+					<reportElement x="15" y="10" width="51" height="20" uuid="4053c7f0-675d-4212-97b2-c25b806bcce8"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Caixa :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="89" y="10" width="100" height="20" uuid="3703f080-4786-43f1-8803-02f60fa6c8f4"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CD_CAIXA}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="15" y="39" width="100" height="20" uuid="809c30b3-89af-4afc-9217-4fcdb4536a99"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Document]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="160" y="39" width="100" height="20" uuid="3a3719f5-9c14-4bdb-bfba-2d9a08c5ffac"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Type]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="270" y="39" width="100" height="20" uuid="16cd1e1f-b438-4096-8be7-08262bc8ba35">
+						<property name="com.jaspersoft.studio.element.name" value="E"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Enter
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="39" width="100" height="20" uuid="f76be8cc-18eb-4533-9c89-d6528d0d139e"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Observation]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<textField>
+					<reportElement x="71" y="5" width="170" height="15" uuid="1a7e5303-1322-47c2-a669-2495347e825e"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{grupoCaixa_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="20" y="5" width="51" height="15" uuid="2fcaa90e-52a0-4754-98ff-ae52b881402b"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL : ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="550" height="30" uuid="6a7b7ec0-b40d-46ce-84c2-b63387e3a30a"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documents Reports]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="450" y="10" width="100" height="20" uuid="28d621e1-159d-4e2c-90ad-6b231fecb049"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="0" width="145" height="27" uuid="811ca169-f7dc-40a5-b142-254688a76444">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4388861e-ba3e-40b0-8f6b-576fdf498ce8"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="4" width="100" height="16" uuid="c830488e-7abb-4688-a873-a29456cd82fb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca20d457-381b-46e7-91f4-7a90ad63b332"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="4" width="120" height="16" uuid="e7660fcb-6d1d-409b-8064-1de06461ab6a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f43be145-5f59-4a28-b9d0-5ba5f584c5a5"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_ENTRADA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="5" width="165" height="15" uuid="377eae94-9eea-428d-bad2-a99c3809b8c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="451d64bd-043d-406d-8d06-04bf3f81169a"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OBSERVACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
