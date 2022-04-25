@@ -25,7 +25,10 @@ public class ClientReport {
 
     private String getPathToReportPackage() {
 
-        return "D:\\Workspace_outros\\RelatorioJasper\\src\\main\\resources\\report\\Clients.jrxml";
+        //Windows
+        //return "D:\\Workspace_outros\\RelatorioJasper\\src\\main\\resources\\report\\Clients.jrxml";
+        //Linux
+        return "/home/ifj/workspace/outros/RelatorioJasper/src/main/resources/report/Clients.jrxml";
     }
 
     private void generateReport(List<Client> clientList) throws Exception {
@@ -36,6 +39,10 @@ public class ClientReport {
         JasperPrint print = JasperFillManager.fillReport(report, params,
                 new JRBeanCollectionDataSource(clientList));
 
-        JasperExportManager.exportReportToPdfFile(print, "D:/Report/ClientsReport.pdf");
+        //Windows
+        //JasperExportManager.exportReportToPdfFile(print, "D:/Report/ClientsReport.pdf");
+        //Linux
+        JasperExportManager.exportReportToPdfFile(print,
+            "/home/ifj/Downloads/Report/ClientsReport.pdf");
     }
 }
